@@ -97,11 +97,18 @@ function reducer(state, { type, payload }) {
           currentOperand: null,
           operwrite: false,}
       }
-      if (state.currentOperand === null) return {};
-      if (state.currentOperand.lenght === 1) return {...state, currentOperand: 0};
+      if (state.currentOperand === null) return {...state,};
+      if (state.currentOperand.length === 1) {
+        return {
+          ...state,
+          
+          currentOperand: null,
+        };
+      }
       return{
         ...state,
-        currentOperand: currentOperand.slice(0,-1)
+        currentOperand: currentOperand.slice(0,-1),
+        
       }
 
     default:
@@ -119,7 +126,7 @@ export function evaluate({currentOperand, previousOperand, operation}) {
     result = parseFloat(currentOperand) + parseFloat(previousOperand);
   } else if (operation === '-') {
     result = parseFloat(currentOperand) - parseFloat(previousOperand);
-  } else if (operation === '/') {
+  } else if (operation === '÷') {
     if (parseFloat(previousOperand) === 0) {
       result = "Error: Cannot divide by zero";
     } else {
